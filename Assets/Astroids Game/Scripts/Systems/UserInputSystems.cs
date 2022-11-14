@@ -5,13 +5,13 @@ using UserInput.Components;
 
 namespace UserInput.Systems
 {
-    public class UserInputSystems: ComponentSystem
+    public class UserInputSystems : ComponentSystem
     {
         private EntityQuery _entityQuery;
         private UserControls _userControls;
 
         private float2 _moveInput;
-
+        private bool _isMove;
         protected override void OnCreate()
         {
             _userControls = new UserControls();
@@ -33,6 +33,7 @@ namespace UserInput.Systems
         private void MoveInput(UnityEngine.InputSystem.InputAction.CallbackContext obj)
         {
             _moveInput = obj.ReadValue<Vector2>();
+            _isMove = _moveInput.x != 0 || _moveInput.y != 0;
         }
 
         protected override void OnUpdate()
@@ -41,6 +42,7 @@ namespace UserInput.Systems
                 .ForEach((Entity entity, ref InputMoveData inputData) =>
                 {
                     inputData.Move = _moveInput;
+                    inputData.isMove = _isMove;
                 });
         }
     }

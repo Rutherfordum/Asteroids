@@ -15,5 +15,6 @@ namespace UserInput.Components
     public struct InputMoveData : IComponentData
     {
         public float2 Move;
+        public bool isMove;
     }
 }
