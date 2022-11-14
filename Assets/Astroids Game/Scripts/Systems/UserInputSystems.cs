@@ -20,9 +20,13 @@ namespace UserInput.Systems
             _userControls.Playeractionmap.Moveaction.performed += MoveInput;
             _userControls.Playeractionmap.Moveaction.canceled += MoveInput;
 
-            _userControls.Enable();
 
             _entityQuery = GetEntityQuery(ComponentType.ReadOnly<InputMoveData>());
+        }
+
+        protected override void OnStartRunning()
+        {
+            _userControls.Enable();
         }
 
         protected override void OnStopRunning()

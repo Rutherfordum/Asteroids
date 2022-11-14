@@ -151,7 +151,7 @@ public partial class @UserControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""3f3e7fc6-1e5d-47d8-9cab-d0eb40881719"",
-                    ""path"": ""<Gamepad>/leftStick"",
+                    ""path"": ""<AndroidJoystick>/stick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -166,12 +166,24 @@ public partial class @UserControls : IInputActionCollection2, IDisposable
         {
             ""name"": ""PC"",
             ""bindingGroup"": ""PC"",
-            ""devices"": []
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
         },
         {
             ""name"": ""Gamepad"",
             ""bindingGroup"": ""Gamepad"",
-            ""devices"": []
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Joystick>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
         }
     ]
 }");
