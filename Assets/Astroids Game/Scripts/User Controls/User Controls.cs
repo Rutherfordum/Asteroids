@@ -35,6 +35,15 @@ public partial class @UserControls : IInputActionCollection2, IDisposable
                     ""processors"": ""NormalizeVector2"",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shoot action"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""5d51b98c-e982-4906-9262-555ce186c3f3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -158,6 +167,28 @@ public partial class @UserControls : IInputActionCollection2, IDisposable
                     ""action"": ""Move action"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""10f43803-94a6-429f-b092-a412a0538eb8"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""Shoot action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a618c25b-293b-4870-abb1-663e7fcf79dd"",
+                    ""path"": ""<AndroidJoystick>/trigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Shoot action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -190,6 +221,7 @@ public partial class @UserControls : IInputActionCollection2, IDisposable
         // Player action map
         m_Playeractionmap = asset.FindActionMap("Player action map", throwIfNotFound: true);
         m_Playeractionmap_Moveaction = m_Playeractionmap.FindAction("Move action", throwIfNotFound: true);
+        m_Playeractionmap_Shootaction = m_Playeractionmap.FindAction("Shoot action", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -250,11 +282,13 @@ public partial class @UserControls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Playeractionmap;
     private IPlayeractionmapActions m_PlayeractionmapActionsCallbackInterface;
     private readonly InputAction m_Playeractionmap_Moveaction;
+    private readonly InputAction m_Playeractionmap_Shootaction;
     public struct PlayeractionmapActions
     {
         private @UserControls m_Wrapper;
         public PlayeractionmapActions(@UserControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Moveaction => m_Wrapper.m_Playeractionmap_Moveaction;
+        public InputAction @Shootaction => m_Wrapper.m_Playeractionmap_Shootaction;
         public InputActionMap Get() { return m_Wrapper.m_Playeractionmap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -267,6 +301,9 @@ public partial class @UserControls : IInputActionCollection2, IDisposable
                 @Moveaction.started -= m_Wrapper.m_PlayeractionmapActionsCallbackInterface.OnMoveaction;
                 @Moveaction.performed -= m_Wrapper.m_PlayeractionmapActionsCallbackInterface.OnMoveaction;
                 @Moveaction.canceled -= m_Wrapper.m_PlayeractionmapActionsCallbackInterface.OnMoveaction;
+                @Shootaction.started -= m_Wrapper.m_PlayeractionmapActionsCallbackInterface.OnShootaction;
+                @Shootaction.performed -= m_Wrapper.m_PlayeractionmapActionsCallbackInterface.OnShootaction;
+                @Shootaction.canceled -= m_Wrapper.m_PlayeractionmapActionsCallbackInterface.OnShootaction;
             }
             m_Wrapper.m_PlayeractionmapActionsCallbackInterface = instance;
             if (instance != null)
@@ -274,6 +311,9 @@ public partial class @UserControls : IInputActionCollection2, IDisposable
                 @Moveaction.started += instance.OnMoveaction;
                 @Moveaction.performed += instance.OnMoveaction;
                 @Moveaction.canceled += instance.OnMoveaction;
+                @Shootaction.started += instance.OnShootaction;
+                @Shootaction.performed += instance.OnShootaction;
+                @Shootaction.canceled += instance.OnShootaction;
             }
         }
     }
@@ -299,5 +339,6 @@ public partial class @UserControls : IInputActionCollection2, IDisposable
     public interface IPlayeractionmapActions
     {
         void OnMoveaction(InputAction.CallbackContext context);
+        void OnShootaction(InputAction.CallbackContext context);
     }
 }

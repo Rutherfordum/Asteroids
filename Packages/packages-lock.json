@@ -6,25 +6,6 @@
       "source": "builtin",
       "dependencies": {}
     },
-    "com.unity.adaptiveperformance": {
-      "version": "4.0.1",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.subsystemregistration": "1.1.0",
-        "com.unity.profiling.core": "1.0.2"
-      },
-      "url": "https://packages.unity.com"
-    },
-    "com.unity.adaptiveperformance.samsung.android": {
-      "version": "4.0.1",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.adaptiveperformance": "4.0.1"
-      },
-      "url": "https://packages.unity.com"
-    },
     "com.unity.burst": {
       "version": "1.6.6",
       "depth": 1,
@@ -167,6 +148,22 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.unity.physics": {
+      "version": "0.51.1-preview.21",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.burst": "1.6.6",
+        "com.unity.collections": "1.4.0",
+        "com.unity.entities": "0.51.1-preview.21",
+        "com.unity.mathematics": "1.2.6",
+        "com.unity.test-framework": "1.1.31",
+        "com.unity.test-framework.performance": "2.8.0-preview",
+        "com.unity.modules.imgui": "1.0.0",
+        "com.unity.modules.jsonserialize": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.platforms": {
       "version": "0.51.1-preview.21",
       "depth": 1,
@@ -229,6 +226,15 @@
         "com.unity.shadergraph": "12.1.7"
       }
     },
+    "com.unity.rendering.hybrid": {
+      "version": "0.51.1-preview.21",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.entities": "0.51.1-preview.21"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.roslyn": {
       "version": "0.2.2-preview",
       "depth": 1,
@@ -278,15 +284,6 @@
         "com.unity.render-pipelines.core": "12.1.7",
         "com.unity.searcher": "4.9.1"
       }
-    },
-    "com.unity.subsystemregistration": {
-      "version": "1.1.0",
-      "depth": 1,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.modules.subsystems": "1.0.0"
-      },
-      "url": "https://packages.unity.com"
     },
     "com.unity.test-framework": {
       "version": "1.3.0",

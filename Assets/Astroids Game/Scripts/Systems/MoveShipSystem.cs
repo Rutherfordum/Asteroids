@@ -1,39 +1,31 @@
 ﻿using Asteroid.Components;
 using Unity.Entities;
-using UnityEngine;
+using Unity.Mathematics;
+using Unity.Transforms;
 using UserInput.Components;
 
 namespace Asteroid.Systems
 {
-    public class MoveShipSystem : ComponentSystem
+    public partial class MoveShipSystem : SystemBase
     {
-        private EntityQuery _entityQuery;
-
-        protected override void OnCreate()
-        {
-            _entityQuery = GetEntityQuery(ComponentType.ReadOnly<InputMoveData>(),
-                ComponentType.ReadOnly<MoveShipData>(),
-                ComponentType.ReadOnly<Transform>());
-        }
-
         protected override void OnUpdate()
         {
-            Entities.With(_entityQuery)
-                .ForEach((Entity entity, Transform transform, ref InputMoveData inputData, ref MoveShipData moveData) =>
+            Entities.ForEach(
+                (ref Rotation rotation, 
+                ref Translation transform,
+                ref InputMoveData inputData,
+                ref MoveShipData moveData) =>
                 {
-                    if (!inputData.isMove)
+                    if (!inputData.MoveAction)
                         return;
 
-                    var pos = transform.position;
-                    pos += new Vector3(inputData.Move.x, 0, inputData.Move.y) * moveData.Speed;
+                    var pos = transform.Value;
+                    pos += new float3(inputData.Move.x, 0, inputData.Move.y) * moveData.Speed;
+                    transform.Value = pos;
 
-                    transform.position = pos;
-                    Quaternion rotation = Quaternion.LookRotation(new Vector3(inputData.Move.x, 0, inputData.Move.y));
-
-                    transform.rotation =
-                        Quaternion.Lerp(transform.rotation, rotation, moveData.SpeedRotate * Time.DeltaTime);
-
-                });
+                    quaternion targetRotation = quaternion.LookRotation(new float3(inputData.Move.x, 0, inputData.Move.y),math.up());
+                    rotation.Value = math.slerp(rotation.Value, targetRotation, moveData.SpeedRotate);
+                }).Run();
 
         }
     }

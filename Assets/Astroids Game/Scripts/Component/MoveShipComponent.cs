@@ -39,8 +39,8 @@ namespace Asteroid.Components
         {
             dstManager.AddComponentData(entity, new MoveShipData()
             {
-                Speed = this._speed/1000,
-                SpeedRotate = this._speedRotate
+                Speed = this._speed/100,
+                SpeedRotate = this._speedRotate/100
             });
         }
     }

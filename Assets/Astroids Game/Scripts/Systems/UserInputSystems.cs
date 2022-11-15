@@ -5,13 +5,14 @@ using UserInput.Components;
 
 namespace UserInput.Systems
 {
-    public class UserInputSystems : ComponentSystem
+    public partial class UserInputSystems : SystemBase
     {
-        private EntityQuery _entityQuery;
         private UserControls _userControls;
 
         private float2 _moveInput;
-        private bool _isMove;
+        private bool _moveAction;
+        private bool _shootAction;
+
         protected override void OnCreate()
         {
             _userControls = new UserControls();
@@ -20,8 +21,9 @@ namespace UserInput.Systems
             _userControls.Playeractionmap.Moveaction.performed += MoveInput;
             _userControls.Playeractionmap.Moveaction.canceled += MoveInput;
 
-
-            _entityQuery = GetEntityQuery(ComponentType.ReadOnly<InputMoveData>());
+            _userControls.Playeractionmap.Shootaction.started += ShootInput;
+            _userControls.Playeractionmap.Shootaction.performed += ShootInput;
+            _userControls.Playeractionmap.Shootaction.canceled += ShootInput;
         }
 
         protected override void OnStartRunning()
@@ -37,17 +39,23 @@ namespace UserInput.Systems
         private void MoveInput(UnityEngine.InputSystem.InputAction.CallbackContext obj)
         {
             _moveInput = obj.ReadValue<Vector2>();
-            _isMove = _moveInput.x != 0 || _moveInput.y != 0;
+            _moveAction = _moveInput.x != 0 || _moveInput.y != 0;
+        }
+
+        private void ShootInput(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+        {
+            _shootAction = obj.ReadValue<float>() > 0.01;
         }
 
         protected override void OnUpdate()
         {
-            Entities.With(_entityQuery)
-                .ForEach((Entity entity, ref InputMoveData inputData) =>
+            Entities.ForEach(
+                (ref InputMoveData inputData, ref InputShootData shootData) =>
                 {
                     inputData.Move = _moveInput;
-                    inputData.isMove = _isMove;
-                });
+                    inputData.MoveAction = _moveAction;
+                    shootData.ShootAction = _shootAction;
+                }).WithoutBurst().Run();
         }
     }
 }
