@@ -5,6 +5,9 @@ using UnityEngine;
 public class ShootAbilityComponent : MonoBehaviour, IShootAbility
 {
     [SerializeField]
+    private Transform _spawnPosition;
+
+    [SerializeField]
     private GameObject _bulletPrefab;
 
     [SerializeField]
@@ -37,7 +40,7 @@ public class ShootAbilityComponent : MonoBehaviour, IShootAbility
     {
         if (Time.time < _shootTime + ShootDelay) return;
         _shootTime = Time.time;
-        Instantiate(_bulletPrefab, transform.position, transform.rotation);
+        Instantiate(_bulletPrefab, _spawnPosition.position, _spawnPosition.rotation);
         //_objectPoolEcs.Get(transform.position,transform.rotation);
     }
 

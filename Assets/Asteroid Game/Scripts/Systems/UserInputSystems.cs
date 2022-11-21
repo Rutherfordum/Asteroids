@@ -36,7 +36,7 @@ public partial class UserInputSystems : SystemBase
         _playerControls.Disable();
     }
 
-    private void InputMove(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void InputMove(InputAction.CallbackContext obj)
     {
         _moveVector = obj.ReadValue<Vector2>();
         _moveAction = _moveVector.x != 0 || _moveVector.y != 0;
