@@ -25,6 +25,21 @@ public class ShootAbilityComponent : MonoBehaviour, IShootAbility
     }
 
     private float _shootTime;
+    //private ObjectPoolECS _objectPoolEcs;
+
+    //void Awake()
+    //{
+    //    _objectPoolEcs = new ObjectPoolECS(_bulletPrefab,this);
+    //    _objectPoolEcs.LoadToScene(20);
+    //}
+
+    public void Execute()
+    {
+        if (Time.time < _shootTime + ShootDelay) return;
+        _shootTime = Time.time;
+        Instantiate(_bulletPrefab, transform.position, transform.rotation);
+        //_objectPoolEcs.Get(transform.position,transform.rotation);
+    }
 
 #if UNITY_EDITOR
     private void OnValidate()
@@ -33,12 +48,4 @@ public class ShootAbilityComponent : MonoBehaviour, IShootAbility
             GetComponent<AbilitiesComponent>().Abilities.Add(this);
     }
 #endif
-
-    public void Execute()
-    {
-        if (Time.time < _shootTime + ShootDelay) return;
-        _shootTime = Time.time;
-
-        Instantiate(BulletPrefab, transform.position, transform.rotation);
-    }
 }

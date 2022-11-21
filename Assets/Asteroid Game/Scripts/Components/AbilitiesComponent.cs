@@ -11,9 +11,15 @@ public class AbilitiesComponent : MonoBehaviour, IConvertGameObjectToEntity
         foreach (var ability in Abilities)
         {
             if (ability is IShootAbility)
-            {
                 dstManager.AddComponentData(entity, new ShootData());
-            }
+
+            if (ability is IMoveAbility moveAbility)
+                dstManager.AddComponentData(entity, new MoveData()
+                {
+                    Speed = moveAbility.Speed,
+                    TurningSpeed = moveAbility.TurningSpeed
+                });
+
         }
     }
 }

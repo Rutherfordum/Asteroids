@@ -134,9 +134,9 @@ GameObject:
   - component: {fileID: 519172191}
   - component: {fileID: 519172192}
   - component: {fileID: 519172193}
-  - component: {fileID: 519172194}
-  - component: {fileID: 519172195}
   - component: {fileID: 519172197}
+  - component: {fileID: 519172195}
+  - component: {fileID: 519172194}
   - component: {fileID: 519172196}
   m_Layer: 0
   m_Name: Ship
@@ -226,7 +226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletPrefab: {fileID: 1010660813696334203, guid: b1267c1ead7a4fd4ca452582245d80c8, type: 3}
-  _shootDelay: 0.5
+  _shootDelay: 0.1
 --- !u!114 &519172197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,6 +241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Abilities:
   - {fileID: 519172196}
+  - {fileID: 519172194}
 --- !u!1 &576693835
 GameObject:
   m_ObjectHideFlags: 0
