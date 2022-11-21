@@ -35,6 +35,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": ""NormalizeVector2"",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shoot action"",
+                    ""type"": ""Button"",
+                    ""id"": ""1e7dfe7f-316a-4532-96cc-60dddb52f6bc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -169,6 +178,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Move action"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""65bb6a4d-8791-4ed3-a9c5-c1888dc554ef"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""Shoot action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f52ffd6a-7cd2-4e23-9e98-c5f21b304ce6"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Shoot action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -206,6 +237,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         // Player action map
         m_Playeractionmap = asset.FindActionMap("Player action map", throwIfNotFound: true);
         m_Playeractionmap_Moveaction = m_Playeractionmap.FindAction("Move action", throwIfNotFound: true);
+        m_Playeractionmap_Shootaction = m_Playeractionmap.FindAction("Shoot action", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -266,11 +298,13 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Playeractionmap;
     private IPlayeractionmapActions m_PlayeractionmapActionsCallbackInterface;
     private readonly InputAction m_Playeractionmap_Moveaction;
+    private readonly InputAction m_Playeractionmap_Shootaction;
     public struct PlayeractionmapActions
     {
         private @PlayerControls m_Wrapper;
         public PlayeractionmapActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Moveaction => m_Wrapper.m_Playeractionmap_Moveaction;
+        public InputAction @Shootaction => m_Wrapper.m_Playeractionmap_Shootaction;
         public InputActionMap Get() { return m_Wrapper.m_Playeractionmap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -283,6 +317,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Moveaction.started -= m_Wrapper.m_PlayeractionmapActionsCallbackInterface.OnMoveaction;
                 @Moveaction.performed -= m_Wrapper.m_PlayeractionmapActionsCallbackInterface.OnMoveaction;
                 @Moveaction.canceled -= m_Wrapper.m_PlayeractionmapActionsCallbackInterface.OnMoveaction;
+                @Shootaction.started -= m_Wrapper.m_PlayeractionmapActionsCallbackInterface.OnShootaction;
+                @Shootaction.performed -= m_Wrapper.m_PlayeractionmapActionsCallbackInterface.OnShootaction;
+                @Shootaction.canceled -= m_Wrapper.m_PlayeractionmapActionsCallbackInterface.OnShootaction;
             }
             m_Wrapper.m_PlayeractionmapActionsCallbackInterface = instance;
             if (instance != null)
@@ -290,6 +327,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Moveaction.started += instance.OnMoveaction;
                 @Moveaction.performed += instance.OnMoveaction;
                 @Moveaction.canceled += instance.OnMoveaction;
+                @Shootaction.started += instance.OnShootaction;
+                @Shootaction.performed += instance.OnShootaction;
+                @Shootaction.canceled += instance.OnShootaction;
             }
         }
     }
@@ -315,5 +355,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     public interface IPlayeractionmapActions
     {
         void OnMoveaction(InputAction.CallbackContext context);
+        void OnShootaction(InputAction.CallbackContext context);
     }
 }

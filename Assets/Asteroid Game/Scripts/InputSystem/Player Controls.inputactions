@@ -13,6 +13,15 @@
                     "processors": "NormalizeVector2",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Shoot action",
+                    "type": "Button",
+                    "id": "1e7dfe7f-316a-4532-96cc-60dddb52f6bc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -145,6 +154,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Move action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "65bb6a4d-8791-4ed3-a9c5-c1888dc554ef",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Shoot action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f52ffd6a-7cd2-4e23-9e98-c5f21b304ce6",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Shoot action",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

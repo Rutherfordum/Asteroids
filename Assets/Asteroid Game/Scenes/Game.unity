@@ -136,6 +136,8 @@ GameObject:
   - component: {fileID: 519172193}
   - component: {fileID: 519172194}
   - component: {fileID: 519172195}
+  - component: {fileID: 519172197}
+  - component: {fileID: 519172196}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Untagged
@@ -211,6 +213,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36ceec0f9af1a1240b51c5e403f5bca8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &519172196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519172190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20acd9ce4f82b05449a1ecb9564b9b32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bulletPrefab: {fileID: 1010660813696334203, guid: b1267c1ead7a4fd4ca452582245d80c8, type: 3}
+  _shootDelay: 0.5
+--- !u!114 &519172197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519172190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c07f620b6c57ed643bacce2d7b3d1f49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Abilities:
+  - {fileID: 519172196}
 --- !u!1 &576693835
 GameObject:
   m_ObjectHideFlags: 0

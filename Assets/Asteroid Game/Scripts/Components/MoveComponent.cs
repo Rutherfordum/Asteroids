@@ -6,6 +6,7 @@ public class MoveComponent : MonoBehaviour, IConvertGameObjectToEntity
     [SerializeField]
     [Range(1, 10)]
     private float _speed = 1;
+   
     [SerializeField]
     [Range(1, 10)]
     private float _turningSpeed = 10;

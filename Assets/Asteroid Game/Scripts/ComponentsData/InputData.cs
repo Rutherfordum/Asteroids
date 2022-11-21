@@ -5,4 +5,5 @@ public struct InputData : IComponentData
 {
     public float2 MoveVector;
     public bool MoveAction;
+    public bool ShootAction;
 }
