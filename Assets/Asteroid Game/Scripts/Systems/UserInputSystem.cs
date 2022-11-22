@@ -3,7 +3,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public partial class UserInputSystems : SystemBase
+public partial class UserInputSystem : SystemBase
 {
     private PlayerControls _playerControls;
 

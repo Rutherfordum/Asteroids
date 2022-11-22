@@ -20,6 +20,15 @@ public class AbilitiesComponent : MonoBehaviour, IConvertGameObjectToEntity
                     TurningSpeed = moveAbility.TurningSpeed
                 });
 
+            if (ability is ILifeTimeAbility lifeTimeAbility)
+            {
+                dstManager.AddComponentData(entity, new LifeTimeData()
+                {
+                    LifeTime = lifeTimeAbility.LifeTime
+                });
+
+            }
+
         }
     }
 }
